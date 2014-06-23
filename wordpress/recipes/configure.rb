@@ -75,9 +75,11 @@ node[:deploy].each do |app_name, deploy|
 end
 
 # Create a Cronjob for Wordpress
+domain = deploy[:domains].first 
+command = "wget -q -O - http://#{domain}/wp-cron.php?doing_wp_cron >/dev/null 2>&1"
 cron "wordpress" do
   hour "*"
   minute "*/15"
   weekday "*"
-  command "wget -q -O - http://#{deploy[:domains].first}/wp-cron.php?doing_wp_cron >/dev/null 2>&1"
+  command command
 end
