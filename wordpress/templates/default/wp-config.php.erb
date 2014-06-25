@@ -36,6 +36,8 @@ define('DB_COLLATE', '');
 
 define( 'WP_SITEURL', 'http://<%= @domain %>' );
 define( 'WP_HOME', 'http://<%= @domain %>' );
+define('ALTERNATE_WP_CRON', true);
+define('DISABLE_WP_CRON', false);
 
 
 /**
@@ -66,10 +68,6 @@ define('FORCE_SSL_LOGIN', true);
 define('FORCE_SSL_ADMIN', true);
 <% end -%>
 
-/**
- * Use external cron
- */
-define('DISABLE_WP_CRON', true);
 
 /**
  * WordPress Database Table prefix.
