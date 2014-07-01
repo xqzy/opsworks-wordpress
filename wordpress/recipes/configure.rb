@@ -18,6 +18,12 @@ keys = response.body
 
 # Create the Wordpress config file wp-config.php with corresponding values
 node[:deploy].each do |app_name, deploy|
+    Chef::Log.info("Configuring WP app #{app_name}...")
+
+    if defined?(deploy[:application_type]) && deploy[:application_type] != 'php'                                        
+        Chef::Log.debug("Skipping WP Configure  application #{application} as it is not defined as php wp")
+        next                                                                       
+    end
 
     template "#{deploy[:deploy_to]}/current/wp-config.php" do
         source "wp-config.php.erb"
@@ -39,6 +45,27 @@ node[:deploy].each do |app_name, deploy|
             :domain     => (deploy[:domains].first)
         )
     end
+
+    #template "#{deploy[:deploy_to]}/current/wp-content/w3tc-config/master.php" do
+        #source "master.php.erb"
+        #mode 0660
+        #group deploy[:group]
+
+        #if platform?("ubuntu")
+          #owner "www-data"
+       #elsif platform?("amazon")
+          #owner "apache"
+        #end
+
+        #variables(
+            #:database   => (deploy[:database][:database] rescue nil),
+            #:user       => (deploy[:database][:username] rescue nil),
+            #:password   => (deploy[:database][:password] rescue nil),
+            #:host       => (deploy[:database][:host] rescue nil),
+            #:keys       => (keys rescue nil),
+            #:domain     => (deploy[:domains].first)
+        #)
+    #end
 
 
 	# Import Wordpress database backup from file if it exists
