@@ -21,7 +21,7 @@ node[:deploy].each do |app_name, deploy|
     Chef::Log.info("Configuring WP app #{app_name}...")
 
     if defined?(deploy[:application_type]) && deploy[:application_type] != 'php'                                        
-        Chef::Log.debug("Skipping WP Configure  application #{application} as it is not defined as php wp")
+        Chef::Log.debug("Skipping WP Configure  application #{app_name} as it is not defined as php wp")
         next                                                                       
     end
 
