@@ -1,0 +1,73 @@
+# Fitxer original de check_mk (GPLv2) modificat per APSL 
+# Més informació a http://mathias-kettner.de/checkmk_logfiles.html
+
+/var/log/messages
+ C Fail event detected on md device
+ I mdadm.*: Rebuild.*event detected
+ W mdadm\[
+ W ata.*hard resetting link
+ W ata.*soft reset failed (.*FIS failed)
+ W device-mapper: thin:.*reached low water mark
+ C device-mapper: thin:.*no free space
+
+/var/log/auth.log
+ W sshd.*Corrupted MAC on input
+
+/var/log/syslog /var/log/kern.log
+ I .*registered panic notifier
+ I .*callbacks suppressed
+ C panic
+ C Oops
+ W generic protection rip
+ W .*Unrecovered read error - auto reallocate failed
+
+
+# Patrons logs duply
+/var/log/duply-backup.log
+ C Errors [1-9]\d*
+ C .*Finished state FAILED
+ C -ERROR-
+ C abort
+ W command not found
+
+# Patrons logs Bacula
+/usr/local/var/bacula/working/log
+ C Failed to write
+ C Fatal error:
+ W Please mount Volume 
+ W ERROR in
+
+# Patrons logs Bareos
+/var/log/bareos/bareos.log
+ C Failed to write
+ C Fatal error:
+ W ERROR in
+
+# Contingència Amazon AWS
+/var/log/contingencia.log
+ C (E|e)(R|r)(R|r)(O|r)(R|r)
+ C Oops
+ C (F|f)ailed
+
+# vzdump sobre Proxmox VE
+/var/log/vzdump/openvz-*.log
+ I Unknown iptable module
+ C (E|e)(R|r)(R|r)(O|r)(R|r)
+ C (F|f)(A|a)(I|i)(L|l)
+ W Warning
+
+/var/log/vzdump/qemu-*.log
+ I Unknown iptable module
+ C (E|e)(R|r)(R|r)(O|r)(R|r)
+ C (F|f)(A|a)(I|i)(L|l)
+ W Warning
+
+# Patrons hzimage
+/var/log/hzimage.log
+ C (E|e)(R|r)(R|r)(O|r)(R|r)
+ C (F|f)(A|a)(I|i)(L|l)
+ W not deactivating
+
+# Patrons per aplicacions concretes (personalitzar)
+
+
